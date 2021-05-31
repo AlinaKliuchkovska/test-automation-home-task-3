@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AVIC Tests" parallel="tests" thread-count="4">
+
+    <test name="CartTests">
+        <classes>
+            <class name="pageobject.test.CartTests"/>
+        </classes>
+    </test>
+    <test name="CredentialsTests">
+        <classes>
+            <class name="pageobject.test.CredentialsTests"/>
+        </classes>
+    </test>
+    <test name="FiltersTests">
+        <classes>
+            <class name="pageobject.test.FiltersTests"/>
+        </classes>
+    </test>
+    <test name="SortingTests">
+        <classes>
+            <class name="pageobject.test.SortingTests"/>
+        </classes>
+    </test>
+
+</suite>

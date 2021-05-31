@@ -1,6 +1,5 @@
 package pageobject;
 
-import org.graalvm.compiler.lir.LIRInstruction;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,26 +48,21 @@ public class UserProfilePage extends BasePage {
 
     public UserProfilePage enterPassword(final String password) {
         passwordInput.sendKeys(password, Keys.ENTER);
+        waitForVisibilityOfElement(infoPopup);
+        clickOnCloseInfoPopupButton();
         return this;
     }
 
-    public WebElement getInfoPopup() {
-        return infoPopup;
-    }
-
-    public UserProfilePage clickOnCloseInfoPopupButton(){
+    public UserProfilePage clickOnCloseInfoPopupButton() {
         closeInfoPopupButton.click();
         return this;
     }
 
-    public UserProfilePage clickOnChangePasswordButton(){
+    public UserProfilePage clickOnChangePasswordButton() {
         Actions actions = new Actions(driver);
         actions.moveToElement(changePasswordButton).click().perform();
+        waitForVisibilityOfElement(changePasswordPopup);
         return this;
-    }
-
-    public WebElement getChangePasswordPopup() {
-        return changePasswordPopup;
     }
 
     public UserProfilePage enterOldPassword(final String oldPassword) {
@@ -83,10 +77,13 @@ public class UserProfilePage extends BasePage {
 
     public UserProfilePage confirmNewPassword(final String newPassword) {
         confirmNewPasswordInput.sendKeys(newPassword, Keys.ENTER);
+        waitForVisibilityOfElement(infoPopup);
+        clickOnCloseInfoPopupButton();
         return this;
     }
 
-    public UserProfilePage clickOnLogoutButton(){
+    public UserProfilePage clickOnLogoutButton() {
+        waitForClickableOfElement(logoutButton);
         logoutButton.click();
         return this;
     }

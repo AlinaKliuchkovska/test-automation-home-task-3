@@ -12,8 +12,8 @@ public class SortingTests extends BaseTest {
 
     @Test
     public void checkThatElementsSortedInReverseOrder() {
-        getHomePage().clickOnProductCatalogueButton();
-        getHomePage().clickOnGagzhetyiButton();
+        getHomePage().clickOnProductCatalogueButton()
+                .clickOnGagzhetyiButton();
         getGadzhetyiPage().clickOnKvadrokopteryiButton();
         getKvadrokopteryiPage().selectSortingType(SORTING_TYPE);
         assertTrue(Ordering.natural().reverse().isOrdered(getKvadrokopteryiPage().getPricesOfElements()));

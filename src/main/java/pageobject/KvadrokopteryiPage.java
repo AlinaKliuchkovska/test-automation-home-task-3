@@ -1,5 +1,6 @@
 package pageobject;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +9,11 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.openqa.selenium.By.xpath;
+
 public class KvadrokopteryiPage extends BasePage {
+    public static final String ADD_TO_CART_BUTTON = "//a[@class='prod-cart__buy']";
+
     @FindBy(xpath = "//div[@class='category-top']//select[contains(@class, 'sort')]")
     private WebElement sortingTypeDropdown;
 
@@ -34,21 +39,22 @@ public class KvadrokopteryiPage extends BasePage {
     private WebElement onlyAvailableItemCheckBox;
 
     @FindBy(xpath = "//li[@class='page-item']")
-    List<WebElement> pagesOfAvailableItems;
+    private List<WebElement> pagesOfAvailableItems;
 
     @FindBy(xpath = "//div[@class='item-prod col-lg-3']")
-    List<WebElement> onlyAvailableItems;
+    private List<WebElement> onlyAvailableItems;
 
-    @FindBy(xpath = "//a[@class='prod-cart__buy']")
+    @FindBy(xpath = ADD_TO_CART_BUTTON)
     private List<WebElement> addToCartButton;
 
     public KvadrokopteryiPage(WebDriver driver) {
         super(driver);
     }
 
-    public void selectSortingType(String sortingType) {
+    public KvadrokopteryiPage selectSortingType(String sortingType) {
         Select sortingTypeSelect = new Select(sortingTypeDropdown);
         sortingTypeSelect.selectByVisibleText(sortingType);
+        return this;
     }
 
     public List<String> getPricesOfElements() {
@@ -59,12 +65,9 @@ public class KvadrokopteryiPage extends BasePage {
         return pricesOfElements;
     }
 
-    public WebElement getCartPopup() {
-        return cartPopup;
-    }
-
-    public void clickOnToOrderButton() {
+    public KvadrokopteryiPage clickOnToOrderButton() {
         toOrderButton.click();
+        return this;
     }
 
     public String getValueOfUserNameInCart() {
@@ -79,11 +82,28 @@ public class KvadrokopteryiPage extends BasePage {
         return userEmailInput.getAttribute("value");
     }
 
-    public void checkOnlyAvailableItemCheckBox() {
-        onlyAvailableItemCheckBox.click();
+    public List<WebElement> getOnlyAvailableItems() {
+        return onlyAvailableItems;
     }
 
-    public void clickOnAddToCartButton() {
+    public KvadrokopteryiPage checkOnlyAvailableItemCheckBox() {
+        onlyAvailableItemCheckBox.click();
+        return this;
+    }
+
+    public KvadrokopteryiPage clickOnAddToCartButton() {
         addToCartButton.get(0).click();
+        waitForVisibilityOfElement(cartPopup);
+        return this;
+    }
+
+    public KvadrokopteryiPage moveToTheLastPageOfAvailableItems() {
+        scrollDown();
+        pagesOfAvailableItems.get(pagesOfAvailableItems.size() - 1).click();
+        return this;
+    }
+
+    public boolean isAddToCartButtonEnabled(WebElement item) {
+        return item.findElement(xpath(ADD_TO_CART_BUTTON)).isEnabled();
     }
 }

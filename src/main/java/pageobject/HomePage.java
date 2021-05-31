@@ -27,23 +27,35 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public void clickOnSignInButton() {
+    public HomePage clickOnSignInButton() {
         signInButton.click();
+        return this;
     }
 
-    public void clickOnUserProfileButton() {
+    public HomePage clickOnUserProfileButton() {
+        waitForClickableOfElement(userProfileButton);
         userProfileButton.click();
+        return this;
     }
 
-    public void clickOnProductCatalogueButton() {
+    public HomePage clickOnProductCatalogueButton() {
         productCatalogueButton.click();
+        return this;
     }
 
-    public void clickOnGagzhetyiButton() {
+    public HomePage clickOnGagzhetyiButton() {
         gagzhetyiButton.click();
+        return this;
     }
 
-    public void clickOnCartButton() {
+    public HomePage clickOnCartButton() {
         cartButton.click();
+        return this;
+    }
+
+    public HomePage clickOnDeleteItemFromCartButton(){
+        waitForClickableOfElement(deleteItemFromCartButton);
+        deleteItemFromCartButton.click();
+        return this;
     }
 }

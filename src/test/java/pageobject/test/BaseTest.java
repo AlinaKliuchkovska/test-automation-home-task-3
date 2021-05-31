@@ -1,6 +1,7 @@
 package pageobject.test;
 
 import bo.LoginBO;
+import bo.LogoutBO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -15,7 +16,9 @@ import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
 public class BaseTest {
     private WebDriver driver;
-    private static final String AVIC_URL ="https://avic.ua/";
+    public static final String AVIC_URL = "https://avic.ua/";
+    public static final String MAIN_PASSWORD = "123456789";
+    public static final String ADDITIONAL_PASSWORD = "1234567890";
 
     @BeforeTest
     public void profileSetUp() {
@@ -34,28 +37,31 @@ public class BaseTest {
         driver.close();
     }
 
-    public WebDriver getDriver(){
+    public WebDriver getDriver() {
         return driver;
     }
 
-    public LoginBO getLoginBO(){
-        LoginBO loginBO = new LoginBO(driver);
-        return loginBO;
+    public LoginBO getLoginBO() {
+        return new LoginBO(driver);
     }
 
-    public HomePage getHomePage(){
+    public LogoutBO getLogoutBO() {
+        return new LogoutBO(driver);
+    }
+
+    public HomePage getHomePage() {
         return new HomePage(driver);
     }
 
-    public UserProfilePage getUserProfilePage(){
+    public UserProfilePage getUserProfilePage() {
         return new UserProfilePage(driver);
     }
 
-    public GadzhetyiPage getGadzhetyiPage(){
+    public GadzhetyiPage getGadzhetyiPage() {
         return new GadzhetyiPage(driver);
     }
 
-    public KvadrokopteryiPage getKvadrokopteryiPage(){
+    public KvadrokopteryiPage getKvadrokopteryiPage() {
         return new KvadrokopteryiPage(driver);
     }
 }

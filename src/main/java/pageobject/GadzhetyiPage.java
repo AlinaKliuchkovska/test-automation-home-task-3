@@ -12,7 +12,8 @@ public class GadzhetyiPage extends BasePage {
         super(driver);
     }
 
-    public void clickOnKvadrokopteryiButton(){
+    public GadzhetyiPage clickOnKvadrokopteryiButton(){
         kvadrokopteryiButton.click();
+        return this;
     }
 }
